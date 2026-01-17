@@ -41,4 +41,35 @@ func main() {
 
 	// Apakah sama?
 	fmt.Printf("Equal? %v\n", d1.Equal(d2))
+
+	BestPractice()
+}
+
+func BestPractice() {
+	fmt.Println("=== Test 1: Kode asli Anda ===")
+	x1 := decimal.NewFromFloat(0.1)
+	for range 10 {
+		x1 = x1.Add(decimal.NewFromFloat(0.1))
+	}
+	fmt.Printf("Result: %s (Expected: 1.1)\n\n", x1.String())
+
+	fmt.Println("=== Test 2: Start dari 0 ===")
+	x2 := decimal.NewFromFloat(0)
+	for range 10 {
+		x2 = x2.Add(decimal.NewFromFloat(0.1))
+	}
+	fmt.Printf("Result: %s (Expected: 1)\n\n", x2.String())
+
+	fmt.Println("=== Test 3: NewFromString (Best Practice) ===")
+	x3 := decimal.Zero
+	point1, _ := decimal.NewFromString("0.1")
+	for range 10 {
+		x3 = x3.Add(point1)
+	}
+	fmt.Printf("Result: %s (Expected: 1)\n\n", x3.String())
+
+	fmt.Println("=== Test 4: Multiply (Paling Efisien) ===")
+	point1V2, _ := decimal.NewFromString("0.1")
+	x4 := point1V2.Mul(decimal.NewFromInt(10))
+	fmt.Printf("Result: %s (Expected: 1)\n", x4.String())
 }
